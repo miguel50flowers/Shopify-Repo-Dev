@@ -91,12 +91,7 @@
   <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <!-- ------------------------------ Fancybox ------------------------------- -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  <!-- -------------------------------- Yotpo -------------------------------- -->
-  <script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/AuebmJK3vEB4GKyCZx0Q2ZiFfgKWCEkYp5tHUt86/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>
-
-
-  <script type="application/javascript" async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=XYZQtY"></script>
-	<script src='https://www.dwin1.com/19038.js' type='text/javascript' defer='defer'></script>
+  
    </head>
 
 <body
@@ -128,7 +123,6 @@
     {% endif %}
   </div>
 
-  {{ '//www.youtube.com/iframe_api' | script_tag }}
   {{ '//cdn.shopify.com/shopifycloud/shopify-plyr/v1.0/shopify-plyr.css' | stylesheet_tag }}
 
   {%- if request.page_type contains 'customers/' -%}
@@ -138,31 +132,35 @@
   <script>
     window.theme.api_url = "https://t1exfwgrc2.execute-api.us-west-2.amazonaws.com/Prod";
   </script>
-  <script src="{{ 'index.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'quick-menu-custom.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'delivery-date.js' | asset_url }}" defer="defer"></script>
-  {{ 'fastclick.js' | asset_url | script_tag }}
   {{ '//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' | stylesheet_tag }}
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" defer="defer"></script>
-  <!-- --------------------------- Slick Carousel ---------------------------- -->
-  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <!-- --------------------------- Font Awesome ---------------------------- -->
-  <script src="https://kit.fontawesome.com/8b234f0168.js" crossorigin="anonymous"></script>
-  <!-- ------------------------------ Fancybox ------------------------------- -->
-  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer="defer"></script>
-{% include 'swymSnippet' %}
+  {% include 'swymSnippet' %}
 
-{% include 'social-login' %}
+  {% include 'social-login' %}
   {% render 'zendesk-configuration' %}
-
-  <!-- Zendesk Widget script -->
-  <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d6baaa88-28d0-4335-aa1b-33937b0fa55e"></script>
-  
+  <!-- THIS IS A COMMENT TO CLEAR CACHE -->
   </body>
 </html>
-
 <script>
-  // check if surcharge item in cart and remove
+  window.addEventListener('load', (event) => {
+    $.getScript("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=XYZQtY");
+    $.getScript("https://www.dwin1.com/19038.js");
+    $.getScript("//www.youtube.com/iframe_api");
+    $.getScript("https://static.zdassets.com/ekr/snippet.js?key=d6baaa88-28d0-4335-aa1b-33937b0fa55e");
+    $.getScript("https://kit.fontawesome.com/8b234f0168.js");
+    $.getScript("https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js");
+    $.getScript("//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js");
+
+  });
+</script>
+<!-- Scripts -->
+<script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/AuebmJK3vEB4GKyCZx0Q2ZiFfgKWCEkYp5tHUt86/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>
+<script src="{{ 'index.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-menu-custom.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'delivery-date.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'fastclick.js' | asset_url }}" defer="defer"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" defer="defer"></script>
+<script>
+ // check if surcharge item in cart and remove
   const updateCart = async () => {
     var cartContents = await fetch('/cart.js')
     .then(response => response.json())
