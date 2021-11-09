@@ -79,6 +79,8 @@
   
   <!-- This is to remove Yotpo from all pages except products -->
   
+<!--   
+We're comment this to Load when doc it's ready 
   {% capture h_content %}
     {{ content_for_header }}
   {% endcapture %}
@@ -88,8 +90,8 @@
   
   {% else %}
     {{ h_content }}
-  {% endif %}
-  
+  {% endif %} -->
+
   {% render 'shogun-head' %}
   {{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js' | script_tag }}
   <!-- ---------------------------- Google Fonts ----------------------------- -->
@@ -101,6 +103,7 @@
   <!-- ------------------------------ Fancybox ------------------------------- -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     </head>
+
 <body
   class="
     template-{{ request.page_type | handle }}
@@ -165,6 +168,17 @@
     $.getScript("https://kit.fontawesome.com/8b234f0168.js");
     $.getScript("//www.youtube.com/iframe_api");
 });
+$(document).ready(function() {
+        // Store content_for header in a string
+        var content_for_header = "{{ content_for_header | replace: '/', '\/' | replace: '"', '\"'| strip_newlines }}";
+        /*"{{ content_for_header | replace: '/', '\/' | replace: '"', '\"'| strip_newlines }}"; */
+        var templane_name="{{template.name}}";
+        if(templane_name!=="product"){
+          content_for_header=content_for_header.replace('\/\/staticw2.yotpo.com\/AuebmJK3vEB4GKyCZx0Q2ZiFfgKWCEkYp5tHUt86\/widget.js?shop=fiftyflowers-com.myshopify.com','')
+        }
+        // Output content to the head, and add newlines where required
+        $('head').append(content_for_header);
+})
 </script>
 <script src='' type='text/javascript' defer></script>
 <script src="{{ 'index.js' | asset_url }}" defer="defer"></script>
