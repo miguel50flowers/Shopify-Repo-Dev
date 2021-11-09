@@ -86,7 +86,7 @@ This file can be re-written at any time.
   
   <!-- This is to remove Yotpo from all pages except products -->
   
-  {% capture h_content %}
+<!--   {% capture h_content %}
     {{ content_for_header }}
   {% endcapture %}
 
@@ -96,7 +96,7 @@ This file can be re-written at any time.
   {% else %}
     {{ h_content }}
 
-  {% endif %}
+  {% endif %} -->
   
   
 
@@ -202,6 +202,17 @@ window.addEventListener('load', function() {
     $.getScript("https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js");
     $.getScript("https://static.zdassets.com/ekr/snippet.js?key=d6baaa88-28d0-4335-aa1b-33937b0fa55e");
   });
+  $(document).ready(function() {
+        // Store content_for header in a string
+        var content_for_header = "{{ content_for_header | replace: '/', '\/' | replace: '"', '\"'| strip_newlines }}";
+        /*"{{ content_for_header | replace: '/', '\/' | replace: '"', '\"'| strip_newlines }}"; */
+        var templane_name="{{template.name}}";
+        if(templane_name!=="product"){
+          content_for_header=content_for_header.replace('\/\/staticw2.yotpo.com\/AuebmJK3vEB4GKyCZx0Q2ZiFfgKWCEkYp5tHUt86\/widget.js?shop=fiftyflowers-com.myshopify.com','')
+        }
+        // Output content to the head, and add newlines where required
+        $('head').append(content_for_header);
+})
 </script>
 <script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/AuebmJK3vEB4GKyCZx0Q2ZiFfgKWCEkYp5tHUt86/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" defer="defer"></script>

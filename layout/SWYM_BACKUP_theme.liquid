@@ -78,7 +78,7 @@
   {% render 'theme-setting-vars' %}
   {{ 'index.css' | asset_url | stylesheet_tag }}
 
-  {{ content_for_header }}
+<!--   {{ content_for_header }} -->
 
   {% render 'shogun-head' %}
   {{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js' | script_tag }}
@@ -151,6 +151,13 @@
     $.getScript("//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js");
 
   });
+  $(document).ready(function() {
+        // Store content_for header in a string
+        var content_for_header = "{{ content_for_header | replace: '/', '\/' | replace: '"', '\"'| strip_newlines }}";
+        /*"{{ content_for_header | replace: '/', '\/' | replace: '"', '\"'| strip_newlines }}"; */
+        // Output content to the head, and add newlines where required
+        $('head').append(content_for_header);
+  })
 </script>
 <!-- Scripts -->
 <script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/AuebmJK3vEB4GKyCZx0Q2ZiFfgKWCEkYp5tHUt86/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>
