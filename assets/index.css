@@ -269,6 +269,10 @@ https://flickity.metafizzy.co
     
   --color-button-special-darken-2: #8FB28D;
   --color-button-special-2: #7CBB76;
+  --color-button-special-3: #ffffff;
+  --color-background-date:rgb(255, 255, 255);
+  --color-label-date:#7b8289;
+  --color-text-date:#367930;
   
   --color-tab-active: #FBE9DE;
   --color-tab: #F7D1CB;
@@ -485,7 +489,7 @@ select {
   font-family: inherit;
   font-weight: var(--font-body-weight);
   background-color: transparent;
-  color: inherit;
+ /*  color: inherit; */
   -webkit-appearance: none;
 }
 
@@ -3847,7 +3851,7 @@ html.gift-card footer[role='contentinfo'] .gift-card-icon {
     @page {
 
 html.gift-card {
-      margin: 0.5cm
+      margin: 0.5cm;
 }
     }
 
@@ -4892,7 +4896,6 @@ html.gift-card {
   
 .product-single__description__header {
   font-family: var(--font-custom-header);
-  margin: var(--spacing-medium);
   font-size: var(--font-size-heading-small);
   font-weight: bold;
 }
@@ -4905,11 +4908,17 @@ html.gift-card {
   margin-bottom: var(--spacing-medium);
 }
 
-.product-single__description + .product__share {
+.product-single__description{
    margin-top: calc(4px * 3);
   margin-top: var(--spacing-small);
   padding-bottom: var(--spacing-medium);
   margin-left: var(--spacing-medium);
+}
+
+.product__share {
+ padding-bottom: var(--spacing-medium);
+ margin-left: var(--spacing-medium);
+ margin-top: -3% !important;
 }
 
 .search {
@@ -9735,9 +9744,14 @@ html:not(.no-js) .navigation__submenu-item + .navigation__submenu-item {
       padding-top: var(--spacing-medium);
     }
 
-.product-form .pf-input-datepicker-msg.warning .product-form__similar {
+.product-form .pf-input-datepicker-msg.warning{
   margin: 0 var(--spacing-unit);
-  color: var(--color-text-body);
+  color: var(--color-text-date);
+}
+
+.product-form__similar{
+  color: var(--color-text-date);
+  margin: 2%;
 }
 
 .product-form__variants {
@@ -11710,7 +11724,7 @@ div.ui-datepicker td:not(.ui-datepicker-unselectable) .ui-state-active {
 
 .pf-input-datepicker-msg a {
   cursor: pointer;
-  color: var(--color-background-button);
+/*   color: var(--color-background-button); */
   font-weight: 500;
   text-decoration: underline;
 }
@@ -12261,8 +12275,8 @@ div.ui-datepicker select.ui-datepicker-year {
 }
 
 .datepicker__msg.visible {
-  display: flex;
-  margin: var(--spacing-extra-small) var(--spacing-medium);
+/*   display: flex; */
+/*   margin: var(--spacing-extra-small) var(--spacing-medium); */
   font-family: var(--font-custom-header);
   align-items: center;
   font-size: var(--font-size-body-base);
@@ -12282,6 +12296,7 @@ div.ui-datepicker select.ui-datepicker-year {
   border: 1px solid var(--color-border-drawer);
   top: 25px;
   left: 0;
+  color: black;
 }
 
 .datepicker__msg-content {
@@ -13989,7 +14004,7 @@ body .swym-notification-wishlist .swym-close-btn {
 /* ------------------------- Delivery Date Overrides ------------------------ */
 .pf-element--static {
   font-size: var(--font-size-heading-small);
-  display: flex;
+/*   display: flex; */
   flex-direction: column;
 }
 
@@ -13998,8 +14013,8 @@ body .swym-notification-wishlist .swym-close-btn {
 }
 
 .pf-container--datepicker--static {
-  background-color: var(--color-button-special-darken-2);
-  color: var(--color-text-body-contrast);
+  background-color: var(--color-background-date);
+  color: var(--color-label-date);
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr) max-content;
   column-gap: var(--spacing-medium);
@@ -14009,10 +14024,12 @@ body .swym-notification-wishlist .swym-close-btn {
   letter-spacing: 0.5px;
   position: relative;
   margin-top: var(--spacing-small);
+  border-top: solid 0.5px #e2e2e2;
+  border-bottom: solid 0.5px #e2e2e2;
 }
   
 .pf-container--datepicker--static.unavailable {
-  background-color: var(--color-text-body);
+  background-color: var(--color-background-date);
 }
 
 @media (max-width: 60em) {
@@ -14025,6 +14042,8 @@ body .swym-notification-wishlist .swym-close-btn {
   position: relative;
   width: 40px;
   height: 40px;
+  color: #636464;
+  cursor: pointer;
 }
 
 .pf-label--static {
@@ -14033,7 +14052,6 @@ body .swym-notification-wishlist .swym-close-btn {
 }
   
 .pf-label-background {
-  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
@@ -14041,6 +14059,9 @@ body .swym-notification-wishlist .swym-close-btn {
   right: 0;
   bottom: 0;
   cursor: pointer;
+  font-weight: bold;
+  color: var(--color-text-date);
+
 }
 
 .pf-element-message {
@@ -14055,10 +14076,15 @@ body .swym-notification-wishlist .swym-close-btn {
   font-size: var(--font-size-body-large);
   padding: 1px 2px;
   margin: 0;
+  width: 40%;
+  font-weight: bold;
+  color: var(--color-text-date);
+
 }
 
 input#datepicker--static::placeholder {
-  color: var(--color-text-body-contrast);
+  color: black;
+  font-weight: bold;
 }
 
 #datepicker-msg--static {
@@ -15533,4 +15559,11 @@ input#datepicker--static::placeholder {
 
 .search__result-image .image__img {
   height: auto;
+}
+/*** Product Description ***/
+.product-desc{
+  text-align: center;
+}
+.recommendation-text{
+  color:var(--color-text-date);
 }

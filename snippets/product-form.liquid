@@ -27,8 +27,8 @@
     {% endif %}
   {% endfor %}
 {% endfor %}
-{% if suggested_collection != null and suggested_collection != "" %}
-  <a style="display: none;" class="product-form__similar" href="{{ suggested_collection.url }}">{{ 'products.product.browse_similar_flowers' | t }}</a>
+{% if suggested_collection != null and suggested_collection != "" %}  
+<a style="display: none;" class="product-form__similar" href="{{ suggested_collection.url }}">{{ 'products.product.browse_similar_flowers' | t }}</a>
 {% endif %}
 {% endcapture %}
 
@@ -441,15 +441,29 @@ $(function () {
   });
 
   /* On date picker input change */
+  function loadLabels(){
+    const evento=(`<a onclick="handleOpenCalendar()"><u>{{ 'delivery_date.best_delivery_event' | t }}</u></a>`);
+    const bestDeliveryDay =deliveryDateUtil.deliveryDateInfo["{{ product_handle }}"].data.best_delivery_day;
+    const labelReturn=`{{ 'delivery_date.best_delivery_pre' | t }} 
+                         <span class="recommendation-text"> ${bestDeliveryDay} days</span>
+                        {{ 'delivery_date.best_delivery_post_noday' | t }}
+                          ${evento}
+                      `;
+    return labelReturn;
+  }
   $("#datepicker--static").change(function () {
     const dateVal = $(this).val();
     const messageElem = $(".product__panel .pf-label--static  span");
+    const messageElemlabel = $(".product__panel .pf-label-background");
+    let label=loadLabels();
     if (dateVal) {
-      messageElem.text(theme.strings.products.product.delivery_date);
+      messageElem.html(`${label}`);
+      messageElemlabel.html(`{{'delivery_date.label_date'|t}}`);
     } else {
       messageElem.text(theme.strings.products.product.choose_delivery_date);
     }
   });
+
 
 /* ---------------------------- Helper Functions ---------------------------- */
   const getVariantId = () => {
@@ -504,11 +518,15 @@ ${bestDeliveryDay} {{ 'delivery_date.best_delivery_post' | t }}
     $("#datepicker-msg--static")
       .addClass("visible warning")
       .html(
-        "{{ 'delivery_date.warning'  | t }} <a onclick='handleOpenCalendar()''>{{ 'delivery_date.warning_event_date' | t }}</a>"
+        "{{ 'delivery_date.warning' | t }} <a onclick='handleOpenCalendar()''>{{ 'delivery_date.warning_event_date' | t }}</a>"
       );
+    const eventDate=$(".header__calendar__info").text();
+    $("#label_picker").html('Not Avaialable for your <u>event date</u>').css('color', '#d56969');
+    $("#datepicker--static").css('width', '25%').val(eventDate).css('color', '#d56969');
     const browseSimilarFlowers = $(".product-form__similar");
     browseSimilarFlowers.show();
     browseSimilarFlowers.appendTo("#datepicker-msg--static")
+    browseSimilarFlowers.appendTo("#label_date");
     $(".pf-container--datepicker--static").addClass("unavailable");
   }
 

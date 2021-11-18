@@ -74,9 +74,6 @@
             {%- if shop.taxes_included -%}
               {{ 'products.product.include_taxes' | t }}
             {%- endif -%}
-            {%- if shop.shipping_policy.body != blank -%}
-              {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-            {%- endif -%}
           </div>
         {%- endif -%}
 
@@ -112,10 +109,6 @@
         aria-hidden="true"
       >{{ 'products.product.loader_label' | t }}</p>
 
-      <div class="product-single__description__header">
-        {{ 'products.product.you_will_love' | t: flower: product.title }}
-      </div>
-      <div id="product-page-description" class="product-single__description rte rte--product fs-body-base" data-description></div>
 
       {% if section.settings.show_share_buttons %}
         <div class="product__share" data-share="{{ 'product.share' | t }}">
@@ -129,17 +122,23 @@
     {% assign shipping_i = product.metafields.airf.shipping_i %}
 
     <div class="pf__tab__container">
+      <div class="product-desc">
+        <div class="product-single__description__header">
+          {{ 'products.product.you_will_love' | t: flower: product.title }}
+        </div>
+<!--    <div id="product-page-description" class="product-single__description rte rte--product fs-body-base" data-description>
+        </div> -->
+        <div class="product-single__description rte rte--product fs-body-base">
+          {{ product.description}}
+        </div>
+      </div>
       <div class="pf__tab__button">
-        <button class="pf__tab__button__btn active_tab" data-tab-button="description">{{ 'products.product.product_description__title' | t }}</button>
-        <button class="pf__tab__button__btn" data-tab-button="details">{{ 'products.product.product_details' | t }}</button>
+        <button class="pf__tab__button__btn active_tab" data-tab-button="details">{{ 'products.product.product_details' | t }}</button>
         <button class="pf__tab__button__btn" data-tab-button="flower_care">{{ 'products.product.flower_care' | t }}</button>
         <button class="pf__tab__button__btn" data-tab-button="shipping_info">{{ 'products.product.shipping_information' | t }}</button>
       </div>
       <div class="pf__tab">
-        <div class="pf__tab__content" data-tab-content="description">
-          {{ product.description }}
-        </div>
-        <div class="pf__tab__content" data-tab-content="details" style="display:none">
+        <div class="pf__tab__content " data-tab-content="details">
           {% if long_descr and long_descr != '&nbsp' %}{{ long_descr }}{% endif %}  
         </div>
         <div class="pf__tab__content" data-tab-content="flower_care" style="display:none">
@@ -150,17 +149,12 @@
         </div>
       </div>
     </div>  
-    <div class="product__reviews">
-      <h2 class="product__review-title">{{ 'product.customer_reviews' | t }}</h2>
-      <div id="yotpo-pr" class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
-    </div>
   </div>
   
   
 
   {%- assign images = product.media | where: 'media_type', 'image' -%}
   {% render 'lightbox' with images: images %}
-  
 </section>
 
 <script>

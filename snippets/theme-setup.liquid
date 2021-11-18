@@ -33,7 +33,9 @@
       products: {
         product: {
           choose_delivery_date: {{ 'products.product.choose_delivery_date' | t | json }},
-          delivery_date: {{ 'products.product.delivery_date' | t | json }}
+          delivery_date: {{ 'products.product.delivery_date' | t | json }},
+          best_delivery_pre: {{ 'delivery_date.best_delivery_pre'| t | json }},
+          best_delivery_post: {{ 'delivery_date.best_delivery_post'| t | json }},
         }
       }
     }
