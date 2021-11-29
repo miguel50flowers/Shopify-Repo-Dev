@@ -29,6 +29,7 @@
       </div>
       <label id="label_picker"class="pf-label-background" for="datepicker--{{ form_type }}"></label>
       <input disabled placeholder="{{ 'delivery_date.loading' | t }}" id="datepicker--{{ form_type }}" type="text" class="pf-input-datepicker pf-input-datepicker--static disabled"/>
+      <span style="display:none"class="not_available_date"id="available_span" onclick="handleOpenDDate()">{{'delivery_date.not_available2' | t }}</span>
       <div class="pf-input-datepicker-msg datepicker__msg visible">
         <span class="datepicker__msg-content">{{ 'delivery_date.48_hour_title' | t }}</span>
         <span class="datepicker__msg-icon">&nbsp;<u>Delivery Window</u>.<div class="datepicker__msg-tooltip">{{ 'delivery_date.48_hour_description' | t }}</div></span>

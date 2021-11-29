@@ -171,7 +171,7 @@
           <div class="collection__grid grid">
             {% for product in collection.products %}
               <div class="grid__item grid__item--{{ per_row }} animate animate-up">
-                {% render 'product-item', product: product %}
+                {% render 'product-item-nostarts', product: product %}
               </div>
             {% else %}
               <div class="collection__empty">

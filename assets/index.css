@@ -266,16 +266,16 @@ https://flickity.metafizzy.co
 
   --color-button-special: #d56969;
   --color-button-special-darken: #ad5757;
-    
   --color-button-special-darken-2: #8FB28D;
   --color-button-special-2: #7CBB76;
   --color-button-special-3: #ffffff;
   --color-background-date:rgb(255, 255, 255);
   --color-label-date:#7b8289;
   --color-text-date:#367930;
-  
   --color-tab-active: #FBE9DE;
   --color-tab: #F7D1CB;
+  --color-badge-product:#ffff;
+  --color-not-available: rgb(213, 105, 105);
 }
 
 @media (min-width: 40em) {
@@ -489,7 +489,6 @@ select {
   font-family: inherit;
   font-weight: var(--font-body-weight);
   background-color: transparent;
- /*  color: inherit; */
   -webkit-appearance: none;
 }
 
@@ -4667,6 +4666,7 @@ html.gift-card {
 
 .product__content {
   width: 100%;
+  padding-left: 20px;
 }
 
 @media (min-width: 40em) {
@@ -9948,9 +9948,6 @@ html:not(.no-js) .navigation__submenu-item + .navigation__submenu-item {
 
 @media (min-width: 40em) {
 
-.product-item__media {
-    margin-bottom: 30px;
-}
       .product-item__media:hover .product-item__add, .product-item__media[focus-within] .product-item__add {
         transform: translateY(0);
         opacity: 1;
@@ -11724,7 +11721,6 @@ div.ui-datepicker td:not(.ui-datepicker-unselectable) .ui-state-active {
 
 .pf-input-datepicker-msg a {
   cursor: pointer;
-/*   color: var(--color-background-button); */
   font-weight: 500;
   text-decoration: underline;
 }
@@ -12275,8 +12271,6 @@ div.ui-datepicker select.ui-datepicker-year {
 }
 
 .datepicker__msg.visible {
-/*   display: flex; */
-/*   margin: var(--spacing-extra-small) var(--spacing-medium); */
   font-family: var(--font-custom-header);
   align-items: center;
   font-size: var(--font-size-body-base);
@@ -12675,12 +12669,11 @@ section.product {
 
 .product__panel .product-single__title {
   padding: var(--spacing-small);
-  text-align: center;
-  background-color: var(--color-button-special);
-  color: var(--color-text-body-contrast);
+  text-align: left;
+  background-color: var(--color-badge-product);
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .pf__actions__container {
@@ -12704,6 +12697,7 @@ section.product {
 
 .product__panel .swym-button-bar {
   font-family: var(--font-custom-header);
+  float: right;
 }
 
 .pf-quantity-element {
@@ -14004,7 +13998,6 @@ body .swym-notification-wishlist .swym-close-btn {
 /* ------------------------- Delivery Date Overrides ------------------------ */
 .pf-element--static {
   font-size: var(--font-size-heading-small);
-/*   display: flex; */
   flex-direction: column;
 }
 
@@ -14049,6 +14042,7 @@ body .swym-notification-wishlist .swym-close-btn {
 .pf-label--static {
   cursor: pointer;
   font-weight: 500;
+  font-size: 17px;
 }
   
 .pf-label-background {
@@ -14076,12 +14070,11 @@ body .swym-notification-wishlist .swym-close-btn {
   font-size: var(--font-size-body-large);
   padding: 1px 2px;
   margin: 0;
-  width: 40%;
+  width: auto;
   font-weight: bold;
   color: var(--color-text-date);
-
+  caret-color: rgba(0,0,0,0);
 }
-
 input#datepicker--static::placeholder {
   color: black;
   font-weight: bold;
@@ -15428,15 +15421,19 @@ input#datepicker--static::placeholder {
 
 .product-form__review {
   background-color: var(--color-background-meta);
-  padding: var(--spacing-medium);
+  padding: var(--spacing-small);
   color: var(--color-background-button);
+  padding-left: 17px;
 }
 
 .product-form__reviewcaption {
-  font-size: var(--font-size-body-base);
   font-family: var(--font-custom-header);
   color: var(--color-text-body);
   font-weight: 500;
+  padding-top: var(--spacing-small);
+  padding-left: 20px;
+  text-align: left;
+  font-size: 15px;
 }
 
 #review-badge .yotpo-stars {
@@ -15566,4 +15563,14 @@ input#datepicker--static::placeholder {
 }
 .recommendation-text{
   color:var(--color-text-date);
+}
+.avaialable_date{
+display:contents;
+}
+.not_available_date{
+  color:var(--color-not-available);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-weight: bold;
 }

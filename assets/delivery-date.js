@@ -160,6 +160,15 @@
       }
     }
 
+    //if there's no optimal day before or after , set the first one available before
+    for (let i = 0; i < DELIVERY_DAYS_BEFORE_EVENT_LIMIT; i++) {
+      const suggestedDate = subtractDays(optimalDate, i);
+      if (!isSaturdayDate(suggestedDate)) {
+        inputElem.val($.datepicker.formatDate("mm/dd/yy", suggestedDate));
+        inputElem.change();
+        return false;
+      }
+    }
     return false;
   };
 

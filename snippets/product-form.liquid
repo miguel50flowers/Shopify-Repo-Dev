@@ -51,10 +51,11 @@
     data-description="{{ product.description | escape }}"
     data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
   </div>
-  <div class="product-form__reviewcaption">{{ 'product.choose_your_flowers' | t }}</div>
+  
 </div>
   {% unless product.has_only_default_variant %}
     <div class="product-form__controls-group">
+      <div class="product-form__reviewcaption">{{ 'product.choose_your_flowers' | t }}</div>
       {% for option in product.options_with_values %}
       	{% if option.position == 1 %}
           <div class="pf-container product__variant-radio__container">
@@ -449,6 +450,9 @@ $(function () {
                         {{ 'delivery_date.best_delivery_post_noday' | t }}
                           ${evento}
                       `;
+    const labelInput=$("#label_picker").css('color','var(--color-text-date)');
+    const dateInput=$("#datepicker--static").css('color','var(--color-text-date)');
+    $("#available_span").hide(); 
     return labelReturn;
   }
   $("#datepicker--static").change(function () {
@@ -505,6 +509,28 @@ $(function () {
 ${bestDeliveryDay} {{ 'delivery_date.best_delivery_post' | t }} 
 <a onclick="handleOpenCalendar()">{{ 'delivery_date.best_delivery_event' | t }}</a>`);
   }
+  function loadWarningLabels(){
+  let labelReturn='';
+    const evento=(`<a onclick="handleOpenCalendar()"><u>{{ 'delivery_date.best_delivery_event' | t }}</u></a>`);
+    const bestDeliveryDay =deliveryDateUtil.deliveryDateInfo["{{ product_handle }}"].data.best_delivery_day;
+    console.log('bestDeliveryDay',bestDeliveryDay);
+    if(bestDeliveryDay==null|| bestDeliveryDay=='' || bestDeliveryDay==undefined){
+       labelReturn=`      {{ 'delivery_date.not_available3' | t }} 
+                          ${evento}
+                          {{ 'delivery_date.not_available4' | t }} 
+                      `;
+    }else{
+     labelReturn=`{{ 'delivery_date.best_delivery_pre' | t }} 
+                         <span class="recommendation-text"> ${bestDeliveryDay} days</span>
+                        {{ 'delivery_date.best_delivery_post_noday' | t }}
+                          ${evento}
+                      `;
+    }
+    const labelInput=$("#label_picker").css('color','var(--color-text-date)');
+    const dateInput=$("#datepicker--static").css('color','var(--color-text-date)');
+    $("#available_span").hide(); 
+    return labelReturn;
+  }
 
   const handleOpenCalendar = () => {
     $(".event-date")
@@ -515,14 +541,19 @@ ${bestDeliveryDay} {{ 'delivery_date.best_delivery_post' | t }}
   window.handleOpenCalendar = handleOpenCalendar;
 
   function showWarningMessage() {
+    const messageElem = $(".product__panel .pf-label--static  span");
+    let checklabel=loadWarningLabels();
+    messageElem.html(`${checklabel}`)
     $("#datepicker-msg--static")
       .addClass("visible warning")
       .html(
         "{{ 'delivery_date.warning' | t }} <a onclick='handleOpenCalendar()''>{{ 'delivery_date.warning_event_date' | t }}</a>"
       );
     const eventDate=$(".header__calendar__info").text();
-    $("#label_picker").html('Not Avaialable for your <u>event date</u>').css('color', '#d56969');
-    $("#datepicker--static").css('width', '25%').val(eventDate).css('color', '#d56969');
+    const dateInput=$("#datepicker--static").css('color','var(--color-not-available)');
+    $("#label_picker").html("{{ 'delivery_date.not_available1' | t }}").css('color', 'var(--color-not-available)');
+    $("#datepicker--static").css('width','85px').css('color', 'var(--color-not-available)');
+    $("#available_span").show();
     const browseSimilarFlowers = $(".product-form__similar");
     browseSimilarFlowers.show();
     browseSimilarFlowers.appendTo("#datepicker-msg--static")
