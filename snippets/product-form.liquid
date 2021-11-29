@@ -452,7 +452,8 @@ $(function () {
                       `;
     const labelInput=$("#label_picker").css('color','var(--color-text-date)');
     const dateInput=$("#datepicker--static").css('color','var(--color-text-date)');
-    $("#available_span").hide(); 
+    $("#available_span").hide();
+    $("#datepicker-msg--error").hide();
     return labelReturn;
   }
   $("#datepicker--static").change(function () {
@@ -486,16 +487,17 @@ $(function () {
     $("#add-to-cart-button").removeClass("loading");
 
   const showDeliveryDateError = () => {
-    $("#datepicker-msg--static")
+    $("#datepicker-msg--error")
       .removeClass("warning")
       .addClass("visible error")
-      .text("{{ 'delivery_date.invalid_delivery_date' | t }}");
+      .text("{{ 'delivery_date.invalid_delivery_date' | t }}").show();
     $("#datepicker-container--static label").addClass("error");
   };
   const hideErrorAndShowBestDeliveryDate = () => {
-    if ($("#datepicker-msg--static").hasClass("error")) {
+    if ($("#datepicker-msg--error").hasClass("error")) {
+      $("#datepicker-msg--error").hide();
       showBestDeliveryDayMessage("{{ product_handle }}");
-      $("#datepicker-msg--static").removeClass("error warning");
+      $("#datepicker-msg--error").removeClass("error warning");
       $("#datepicker-container--static label").removeClass("error");
     }
   };
