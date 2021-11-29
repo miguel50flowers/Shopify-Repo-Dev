@@ -515,7 +515,6 @@ ${bestDeliveryDay} {{ 'delivery_date.best_delivery_post' | t }}
   let labelReturn='';
     const evento=(`<a onclick="handleOpenCalendar()"><u>{{ 'delivery_date.best_delivery_event' | t }}</u></a>`);
     const bestDeliveryDay =deliveryDateUtil.deliveryDateInfo["{{ product_handle }}"].data.best_delivery_day;
-    console.log('bestDeliveryDay',bestDeliveryDay);
     if(bestDeliveryDay==null|| bestDeliveryDay=='' || bestDeliveryDay==undefined){
        labelReturn=`      {{ 'delivery_date.not_available3' | t }} 
                           ${evento}
